@@ -1,0 +1,287 @@
+{% extends 'core/base.html' %}
+
+{% block head_title %}Banking System{% endblock %}
+
+{% block content %}
+{% if signup_form.non_field_errors %}
+    {% for error in signup_form.non_field_errors %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+        <p class="font-bold">Error!</p>
+        <p class="block sm:inline">{{ error }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+{% if address_form.non_field_errors %}
+    {% for error in address_form.non_field_errors %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+        <p class="font-bold">Error!</p>
+        <p class="block sm:inline">{{ error }}</p>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<h1 class="font-mono font-bold text-3xl text-center pb-5 pt-10">Form</h1>
+<hr />
+<div class="w-full mt-10">
+    <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {% csrf_token %}
+        {% for hidden_field in signup_form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+        {% endfor %}
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.first_name.id_for_label }}">
+                    {{ signup_form.first_name.label }}
+                </label>
+                {{ signup_form.first_name }}
+                {% if signup_form.first_name.errors %}
+                    {% for error in signup_form.first_name.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.last_name.id_for_label }}">
+                    {{ signup_form.last_name.label }}
+                </label>
+                {{ signup_form.last_name }}
+                {% if signup_form.last_name.errors %}
+                    {% for error in signup_form.last_name.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.email.id_for_label }}">
+<!--                    {{ registration_form.email.label }}-->
+                    username
+                </label>
+                {{ signup_form.email }}
+                {% if signup_form.email.errors %}
+                    {% for error in signup_form.email.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.account_type.id_for_label }}">
+                    {{ signup_form.account_type.label }}
+                </label>
+                {{ signup_form.account_type }}
+                {% if signup_form.account_type.errors %}
+                    {% for error in signup_form.account_type.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.gender.id_for_label }}">
+                    {{ signup_form.gender.label }}
+                </label>
+<!--                <input type="radio" name="gender" value="male"> Male <input type="radio" name="gender" value="female"> Female-->
+                {{ signup_form.gender }}
+                {% if signup_form.gender.errors %}
+                    {% for error in signup_form.gender.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.age.id_for_label }}">
+                    {{ signup_form.age.label }}
+                </label>
+                {{ signup_form.age }}
+                {% if signup_form.age.errors %}
+                    {% for error in signup_form.age.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.phone_number.id_for_label }}">
+                    {{ signup_form.phone_number.label }}
+                </label>
+                {{ signup_form.phone_number }}
+                {% if signup_form.phone_number.errors %}
+                    {% for error in signup_form.phone_number.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.birth_date.id_for_label }}">
+                    {{ signup_form.birth_date.label }}
+                </label>
+                {{ signup_form.birth_date }}
+                {% if signup_form.birth_date.errors %}
+                    {% for error in signup_form.birth_date.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.password1.id_for_label }}">
+                    {{ signup_form.password1.label }}
+                </label>
+                {{ signup_form.password1 }}
+                {% if signup_form.password1.errors %}
+                    {% for error in signup_form.password1.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+<!--        </div>-->
+<!--            <div class="flex flex-wrap -mx-3 mb-6">-->
+
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.password2.id_for_label }}">
+                    {{ signup_form.password2.label }}
+                </label>
+                {{ signup_form.password2 }}
+                    {% if signup_form.password2.errors %}
+                    {% for error in signup_form.password2.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+         <div class="flex flex-wrap -mx-3 mb-6">
+<!--             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">-->
+<!--                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.district.id_for_label }}">-->
+<!--                    {{ signup_form.district.label }}-->
+<!--                </label>-->
+<!--                {{ signup_form.district }}-->
+<!--                {% if signup_form.district.errors %}-->
+<!--                    {% for error in signup_form.district.errors %}-->
+<!--                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>-->
+<!--                    {% endfor %}-->
+<!--                {% endif %}-->
+<!--            </div>-->
+             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.keraladistrict.id_for_label }}">
+                    {{ signup_form.keraladistrict.label }}
+                </label>
+                {{ signup_form.keraladistrict }}
+                {% if signup_form.keraladistrict.errors %}
+                    {% for error in signup_form.keraladistrict.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.keralabranch.id_for_label }}">
+                    {{ signup_form.keralabranch.label }}
+                </label>
+                {{ signup_form.keralabranch }}
+                {% if signup_form.keralabranch.errors %}
+                    {% for error in signup_form.keralabranch.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+                 </div>
+                  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                <script>
+                 $("#id_keraladistrict").change(function () {
+                 var url = "http://127.0.0.1:8000/accounts/ajax/load_branches/?keraladistrict_id=1" // get the url of the `load_branhces` view
+                 var keraladistrictId = $(this).val();   // get the selected keraladistrict ID from the HTML input
+
+                 $.ajax({                    // initialize an AJAX request
+                  url: url,                    // set the url of the request (= https://localhost:127.0.0.1:8000/accounts/ajax/load_branches/)
+                  data: {
+                  'keraladistrict_id': keraladistrictId       // add the keraladistrict id to the GET parameters
+                    },
+                  success: function (data) {   // `data` is the return of the `load_branches` view function
+                  console.log(data)
+                  $("#id_keralabranch").html(data);  // replace the contents of the keralabranch input with the data that came from the server
+                     }
+                     });
+
+                    });
+                    </script>
+
+<!--              <div class="flex flex-wrap -mx-3 mb-6">-->
+             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ signup_form.materials_for_label }}">
+                    {{ signup_form.materials.label }}
+                </label>
+                {{ signup_form.materials }}
+                {% if signup_form.materials.errors %}
+                    {% for error in signup_form.materials.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+<!--        </div>-->
+
+        {% for hidden_field in address_form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ address_form.street_address.id_for_label }}">
+                    {{ address_form.street_address.label }}
+                </label>
+                {{ address_form.street_address }}
+                {% if address_form.street_address.errors %}
+                    {% for error in address_form.street_address.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ address_form.city.id_for_label }}">
+                    {{ address_form.city.label }}
+                </label>
+                {{ address_form.city }}
+                {% if address_form.city.errors %}
+                    {% for error in address_form.city.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ address_form.postal_code.id_for_label }}">
+                    {{ address_form.postal_code.label }}
+                </label>
+                {{ address_form.postal_code }}
+                {% if address_form.postal_code.errors %}
+                    {% for error in address_form.postal_code.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ address_form.country.id_for_label }}">
+                    {{ address_form.country.label }}
+                </label>
+                {{ address_form.country }}
+                {% if address_form.country.errors %}
+                    {% for error in address_form.country.errors %}
+                        <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                submit
+            </button>
+        </div>
+             <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="logout">
+                logout
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

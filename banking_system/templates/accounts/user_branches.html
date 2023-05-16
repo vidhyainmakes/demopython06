@@ -1,0 +1,76 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block metadescription %}
+      {% if District %}
+         {{ District.description|truncatewords:155 }}
+      {% else %}
+          Welcome to ABC store where you can buy different items....
+      {% endif %}
+
+{% endblock %}
+
+{% block title %}
+      {% if District %}
+          {{ district.name }}-Branches
+      {% else %}
+          All Districts are give below...
+      {% endif %}
+
+{% endblock %}
+
+{% block content %}
+   {% if district %}
+<div>
+    <div class="row my_row_class">
+        <div class="mx-auto">
+         <p><a href="{% url 'accounts:allbranch' %}"> "All Branches"</a></p>
+        </div>
+    </div>
+</div>
+    {% endif %}
+
+<div class="mx_auto">
+    {% if District %}
+    <div>
+    <h1 class="text-center my_title">{{district.name}}</h1>
+    <p class="text-justify">{{district.link}}</p>
+</div>
+{% else %}
+</div>
+<div>
+    <h1 class="text-center my_title"> All branches</h1>
+    <p class="text-justify">A bank is a financial institution that is licensed to accept checking and savings deposits and make loans. Banks also provide related services such as individual retirement accounts (IRAs), certificates of deposit (CDs), currency exchange, and safe deposit boxes.</p>
+</div>
+{% endif %}
+
+
+<div clas="container">
+    <div class="row mx_auto">
+        {% for District in districts.object_list %}
+        <div class="my_bottom_margin col">
+            <div class="card text-center" >
+            <a href="{{product.get_url}}"> </a>
+            <div class="card-body">
+                <h4>{{District.name}}</h4>
+                <p>{{District.link}}</p>
+            </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+<div clas="container">
+    {% if places.paginator.num_pages > 1 %}
+
+        <hr>
+    <div class="row mx_auto">
+            {% for pg in places.paginator.page_range %}
+                <a href="?page={{pg}}"  class="btn btn-light btn-sm {% if place.number == pg %}active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+</div>
+
+
+{% endblock %}
